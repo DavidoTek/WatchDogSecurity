@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>favicon.ico</file>
+        <file>PageHome.qml</file>
+        <file>PageAV.qml</file>
+        <file>PageFW.qml</file>
+        <file>PageUpdate.qml</file>
+        <file>PageSettings.qml</file>
+        <file>res/pcExclamation.png</file>
+        <file>res/pcNotOK.png</file>
+        <file>res/pcOK.png</file>
+        <file>ButtonX.qml</file>
+        <file>SliderButton.qml</file>
+        <file>PageAbout.qml</file>
+    </qresource>
+</RCC>

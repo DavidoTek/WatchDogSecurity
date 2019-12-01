@@ -1,0 +1,3 @@
+[submodule "uiscan"]
+	path = uiscan
+	url = https://github.com/DavidoTek/uiscan
