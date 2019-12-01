@@ -6,8 +6,11 @@
  - [x] Scan folders
  - [ ] "Simple scan", "Complete scan", "Scan drive"
  - [ ] Rootkit scanner ?
- - [ ] ClamAV Daemon
+ - [ ] Scheduler
  - [ ] Firewall
+ - [ ] Firewall/Virus status information (home page)
+ - [ ] Scan history / Quarantine
+ - [ ] Updater (ClamAV, WatchDogSecurity)
 
 ## Screenshots
 #### WatchDogSecurity - Home page (CSD)
