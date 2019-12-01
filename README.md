@@ -9,6 +9,14 @@
  - [ ] ClamAV Daemon
  - [ ] Firewall
 
+## Screenshots
+#### WatchDogSecurity - Home page (CSD)
+![WatchDogSecurity Center - Home](/images/wds01.png)
+#### WatchDogSecurity - Antivirus page (Native window decoration)
+![WatchDogSecurity Center - AV](/images/wds02.png)
+#### WatchDogSecurity - uiscan
+![WatchDogSecurity - uiscan](/images/uiscan01.png)
+
 ## Building
 ### Manual
  - Build WatchDogSecurity and uiscan
