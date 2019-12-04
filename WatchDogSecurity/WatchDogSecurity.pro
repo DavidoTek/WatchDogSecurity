@@ -38,6 +38,4 @@ RC_ICONS = favicon.ico
 HEADERS += \
     antivirus.h
 
-DISTFILES += \
-    res/commonFilesLinux.txt \
-    res/commonFilesWin.txt
+DISTFILES +=

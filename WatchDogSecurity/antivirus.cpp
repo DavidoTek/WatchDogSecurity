@@ -75,6 +75,24 @@ void Antivirus::updateClam() {
     clamProcess->startDetached(clamCmd);
 }
 
+// scanFixed will either do a simple scan(type=0) or a full scan(type=1)
+void Antivirus::scanFixed(int type)
+{
+    switch(type) {
+    default:
+    case 0:
+        scanFiles(QStandardPaths::writableLocation(QStandardPaths::HomeLocation));   // scan home directory
+        break;
+    case 1:
+        if (platform == "windows") {
+            scanFiles("C:\\");
+        } else {
+            scanFiles("/");
+        }
+        break;
+    }
+}
+
 // scanFiles will scan all given files - NOT TESTED
 void Antivirus::scanFiles(QString f)
 {

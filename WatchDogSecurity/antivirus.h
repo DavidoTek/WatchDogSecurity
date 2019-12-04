@@ -3,6 +3,7 @@
 #include <QString>
 #include <QProcess>
 #include <QSysInfo>
+#include <QStandardPaths>
 
 #include <QNetworkAccessManager>
 #include <QEventLoop>
@@ -22,6 +23,7 @@ public:
     Q_INVOKABLE QString checkVersion(int i = 0);
     int *parseVersionString(QString v);
     Q_INVOKABLE void updateClam();
+    Q_INVOKABLE void scanFixed(int type);
     Q_INVOKABLE void scanFiles(QString files);
     Q_INVOKABLE void scanFolder(QString folder);
     Q_INVOKABLE void startScheduler(bool state);

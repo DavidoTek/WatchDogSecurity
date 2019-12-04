@@ -1,4 +1,0 @@
-%USERPROFILE%\Documents
-%USERPROFILE%\Downloads
-%LOCALAPPDATA%
-%SystemRoot%\System32

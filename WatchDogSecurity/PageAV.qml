@@ -65,7 +65,9 @@ Rectangle {
             width: 184
             height: 120
             buttonText: qsTr("Simple Scan")
-            enabled: false
+            onClicked: {
+                av.scanFixed(0)
+            }
         }
 
         ButtonX {
@@ -73,7 +75,9 @@ Rectangle {
             width: 184
             height: 120
             buttonText: qsTr("Complete Scan")
-            enabled: false
+            onClicked: {
+                av.scanFixed(1)
+            }
         }
 
         ButtonX {
