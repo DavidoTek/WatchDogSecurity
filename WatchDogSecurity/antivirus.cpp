@@ -13,7 +13,8 @@ QString Antivirus::checkVersion(int i)
 {
     QString output;
     if ( i < 2 ) {    // i < 2 : Check clamav / database version
-        QString clamCmd = clamPath + "clamscan --version";
+        QString clamCmd = "clamscan --version";
+        clamProcess->setWorkingDirectory(parsePath(clamPath));
         clamProcess->start(clamCmd);
         clamProcess->waitForFinished();
         clamProcess->waitForReadyRead();
@@ -70,32 +71,49 @@ QString Antivirus::parsePath(QString p)
 // updateClam will manually update ClamAV - NOT TESTED
 void Antivirus::updateClam() {
     QString clamCmd;
-    clamCmd = clamPath + "freshclam";
+    clamCmd = "freshclam";
 
+    // Check if freshclam.conf exists
+    QString cfgFilePath(parsePath(clamPath) + "freshclam.conf");
+    if (!QFileInfo::exists(cfgFilePath)) {
+        QFile configFile(cfgFilePath);
+        configFile.open(QIODevice::ReadWrite | QIODevice::Text);
+        configFile.write("DatabaseMirror database.clamav.net");
+        configFile.close();
+    }
+
+    clamProcess->setWorkingDirectory(parsePath(clamPath));
     clamProcess->startDetached(clamCmd);
 }
 
 // scanFixed will either do a simple scan(type=0) or a full scan(type=1)
-void Antivirus::scanFixed(int type)
+bool Antivirus::scanFixed(int type)
 {
     switch(type) {
     default:
     case 0:
-        scanFiles(parsePath(QStandardPaths::writableLocation(QStandardPaths::HomeLocation)));   // scan home directory
+        return scanFiles(parsePath(QStandardPaths::writableLocation(QStandardPaths::HomeLocation)));   // scan home directory
         break;
     case 1:
         if (platform == "windows") {
-            scanFiles("C:\\");
+            return scanFiles("C:\\");
         } else {
-            scanFiles("/");
+            return scanFiles("/");
         }
         break;
     }
 }
 
 // scanFiles will scan all given files - NOT TESTED
-void Antivirus::scanFiles(QString f)
+bool Antivirus::scanFiles(QString f)
 {
+
+    // Check if freshclam.conf exists
+    QString cfgFilePath(parsePath(clamPath) + "freshclam.conf");
+    if (!QFileInfo::exists(cfgFilePath)) {
+        return false;
+    }
+
     QStringList files = f.split(",file:");
     QStringList clamFiles;
     for (QString file : files) {
@@ -104,6 +122,8 @@ void Antivirus::scanFiles(QString f)
 
     QProcess clamscanProcess;
     clamscanProcess.startDetached("uiscan", clamFiles);
+
+    return true;
 }
 
 // scanFolder will scan the given folder (also used for scanning drives(eg. "C:\" or "/media/usb1/")) - NOT TESTED

@@ -66,7 +66,11 @@ Rectangle {
             height: 120
             buttonText: qsTr("Simple Scan")
             onClicked: {
-                av.scanFixed(0)
+                if (!av.scanFixed(0)) {
+                    msgBox.title = qsTr("Please update!")
+                    msgBox.text = qsTr("Please update the ClamAV database!")
+                    msgBox.visible = true
+                }
             }
         }
 
@@ -76,7 +80,11 @@ Rectangle {
             height: 120
             buttonText: qsTr("Complete Scan")
             onClicked: {
-                av.scanFixed(1)
+                if (!av.scanFixed(1)) {
+                    msgBox.title = qsTr("Please update!")
+                    msgBox.text = qsTr("Please update the ClamAV database!")
+                    msgBox.visible = true
+                }
             }
         }
 

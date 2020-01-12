@@ -1,12 +1,16 @@
 import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.Controls 2.12
-import QtQuick.Dialogs 1.0
+import QtQuick.Dialogs 1.2
 import Qt.labs.settings 1.0
 import wds.antivirus 1.0
 
 Window {
     id: mainWindow
+
+    MessageDialog {
+        id: msgBox
+    }
 
     Settings {
         id: settings
@@ -36,10 +40,18 @@ Window {
         onAccepted: {
             switch(scanType) {
             case 0: // 0: Scan file(s)
-                av.scanFiles(scanFDialog.fileUrls)
+                if (!av.scanFiles(scanFDialog.fileUrls)) {
+                    msgBox.title = qsTr("Please update!")
+                    msgBox.text = qsTr("Please update the ClamAV database!")
+                    msgBox.visible = true
+                }
                 break;
             case 1: // 1: Scan folder
-                av.scanFolder(scanFDialog.fileUrl)
+                if (!av.scanFiles(scanFDialog.fileUrl)) {
+                    msgBox.title = qsTr("Please update!")
+                    msgBox.text = qsTr("Please update the ClamAV database!")
+                    msgBox.visible = true
+                }
                 break;
             }
             settings.lastscan = currentDate
