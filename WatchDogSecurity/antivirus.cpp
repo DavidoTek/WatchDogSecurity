@@ -81,7 +81,7 @@ void Antivirus::scanFixed(int type)
     switch(type) {
     default:
     case 0:
-        scanFiles(QStandardPaths::writableLocation(QStandardPaths::HomeLocation));   // scan home directory
+        scanFiles(parsePath(QStandardPaths::writableLocation(QStandardPaths::HomeLocation)));   // scan home directory
         break;
     case 1:
         if (platform == "windows") {
